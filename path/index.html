@@ -35,11 +35,10 @@
 
   async function main() {
       await liff.init({ liffId: "1654428105-m1DWXpGV" })
-      document.getElementById("isLoggedIn").append(liff.isLoggedIn())
       if (liff.isLoggedIn()) {
         getUserProfile()
       } else {
-        liff.login({redirectUri : "https://james03401.github.io/liff/path/"})
+        liff.login({redirectUri : "https://james03401.github.io/liff/path"})
       }
 
       // 
