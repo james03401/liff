@@ -38,11 +38,11 @@
   <button id="btnLogOut" onclick="logOut()">Log Out</button>
   <button id="btnClose" onclick="closed()">Close</button>
 
-  <!-- <script src="js/vconsole.min.js"></script> -->
-  <!-- <script>
+  <script src="js/vconsole.min.js"></script>
+  <script>
     var vConsole = new VConsole()
     console.log("Hello World!")
-  </script> -->
+  </script>
 
   <script src="https://static.line-scdn.net/liff/edge/versions/2.2.0/sdk.js"></script>
   <script>
@@ -79,7 +79,15 @@
 
     async function scanCode() {
       const result = liff.scanCode()
-      document.getElementById("scanCode").append(result.value)
+
+
+      liff.scanCode().then(result => {
+        document.getElementById("scanCode").append(result.value)
+      }).catch(error => {
+        document.getElementById("scanCode").append(error)
+        console.log(error);
+      });
+
     }
 
     function openWindow() {
@@ -156,17 +164,18 @@
 
     async function main() {
       await liff.init({ liffId: "1654428105-m1DWXpGV" })
-      document.getElementById("isLoggedIn").append(liff.isLoggedIn())
-      if (liff.isLoggedIn()) {
-        getEnvironment()
-        getUserProfile()
-        getContext()
-        getFriendship()
-        createUniversalLink()
-      } else {
-        //liff.login()
-      }
-
+      liff.ready.then(() => {
+        document.getElementById("isLoggedIn").append(liff.isLoggedIn())
+        if (liff.isLoggedIn()) {
+          getEnvironment()
+          getUserProfile()
+          getContext()
+          getFriendship()
+          createUniversalLink()
+        } else {
+          liff.login()
+        }
+      })
       // 
     }
     main()
