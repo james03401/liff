@@ -79,14 +79,10 @@
     }
 
     async function scanCode() {
-      const result = liff.scanCode()
-
-
       liff.scanCode().then(result => {
         document.getElementById("scanCode").append(result.value)
       }).catch(error => {
         document.getElementById("scanCode").append(error)
-
         console.log(error);
       });
 
