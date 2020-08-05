@@ -43,9 +43,10 @@
     var vConsole = new VConsole()
     console.log("Hello World!")
   </script>
-
+  <script src="js/vconsole.min.js"></script>
   <script src="https://static.line-scdn.net/liff/edge/versions/2.2.0/sdk.js"></script>
   <script>
+    var vConsole = new VConsole()
     function createUniversalLink() {
       const link1 = liff.permanentLink.createUrl()
       document.getElementById("universalLink1").append(link1)
@@ -85,6 +86,7 @@
         document.getElementById("scanCode").append(result.value)
       }).catch(error => {
         document.getElementById("scanCode").append(error)
+
         console.log(error);
       });
 
